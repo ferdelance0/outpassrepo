@@ -1,7 +1,16 @@
 
+import 'dart:developer';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motion_toast/resources/arrays.dart';
 
+import 'UserHome.dart';
+var username = TextEditingController();
+var password = TextEditingController();
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -31,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width:  MediaQuery.of(context).size.width * 1,
                     child: TextField(
-
+                      controller: username,
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Color(0xffB4E3EC),
@@ -47,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width:  MediaQuery.of(context).size.width * .9555,
                     child: TextField(obscureText: true,
+                      controller: password,
                       decoration: InputDecoration(
 
                           filled: true,
@@ -72,7 +82,32 @@ class _LoginPageState extends State<LoginPage> {
                           elevation: 0,
                           color: Color(0xff03045E),
                           onPressed: () {
-                            // Action to perform when the button is pressed
+
+                            var username1 = username.text;
+                            var password1 = password.text;
+                            if(username1=="user" && password1=="123"){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UserHome()),
+
+                              );
+                              username.text="";
+                              password.text="";
+                            }
+                            else{
+                              CherryToast.error(
+                                title: Text(''),
+                                enableIconAnimation: false,
+                                displayTitle: false,
+                                description: Text('Invalid account information',style: TextStyle(fontSize: 12),),
+                                toastPosition: Position.top,
+                                animationDuration: Duration(milliseconds: 500),
+                                toastDuration: Duration(milliseconds: 1500),
+                                autoDismiss: true,
+                              ).show(context);
+
+                            };
+
                           },
                           child: Text('Submit',style: TextStyle(color: Colors.white,fontSize: 18.58,fontWeight: FontWeight.w100),),
                         ),
