@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mini/usermain.dart';
 import 'LoginPage.dart';
 void main() {
+  Widget _userwidget = usermain();
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         focusColor: Color(0xff215DA2),
         fontFamily: "Poppins",
-        primarySwatch: Colors.blue,
+        primarySwatch:  Colors.blue,
       ),
       home:  LoginPage(),
     );

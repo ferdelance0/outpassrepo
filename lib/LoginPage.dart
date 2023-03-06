@@ -1,13 +1,8 @@
 
-import 'dart:developer';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
-import 'package:cherry_toast/resources/arrays.dart';
-import 'package:motion_toast/motion_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_toast/resources/arrays.dart';
-
 import 'UserHome.dart';
 var username = TextEditingController();
 var password = TextEditingController();
@@ -24,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
     return  Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-
         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/blob-scene-haikei.png"),fit: BoxFit.fill) ),
         child: SafeArea(
           child: Center(
