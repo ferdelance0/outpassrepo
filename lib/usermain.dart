@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mini/userapplypass.dart';
 
 class usermain extends StatelessWidget {
   const usermain({Key? key}) : super(key: key);
@@ -13,22 +14,34 @@ class usermain extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 220,
-                height: 50,
-                decoration: BoxDecoration(color: Color(0xff215DA2),borderRadius: BorderRadius.circular(56),),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add_box,color: Colors.white),
-                    SizedBox(width: 10,),
-                    Text("Apply For new Outpass",style: TextStyle(fontSize: 12.57,color: Colors.white),)
-                  ],
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ApplyOutpass()),
+                  );
+
+                },
+                child: Container(
+                  width: 220,
+                  height: 50,
+                  decoration: BoxDecoration(color: Color(0xff215DA2),borderRadius: BorderRadius.circular(56),),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add_box,color: Colors.white),
+                      SizedBox(width: 10,),
+                      Text("Apply For new Outpass",style: TextStyle(fontSize: 12.57,color: Colors.white),)
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 17,),
               InkWell(
-                onTap: (){},
+                onTap: (){Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ApplyOutpass()),
+                );},
                 child: Container(
                   width: 220,
                   height: 45,
