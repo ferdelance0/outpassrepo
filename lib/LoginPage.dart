@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/blob-scene-haikei.png"),fit: BoxFit.fill) ),
         child: SafeArea(
           child: Center(
-
             child: Padding(
               padding: const EdgeInsets.fromLTRB(38, 0, 38, 0),
               child: Column(

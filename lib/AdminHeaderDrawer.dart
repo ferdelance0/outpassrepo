@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'AdminAddStudents.dart';
 import 'AdminHome.dart';
+import 'AdminRejectOutpasses.dart';
 import 'LoginPage.dart';
 
 class AdminDrawer extends StatefulWidget {
@@ -48,13 +49,23 @@ class _AdminDrawerState extends State<AdminDrawer> {
             ListTile(
               onTap: (){Navigator.push(
                 context,
+                MaterialPageRoute(builder: (context) => RejectedPass()),
+
+              );},
+              leading: Icon(Ionicons.documents_outline,color: Colors.white),
+              title: Text("Rejected Outpasses",style: TextStyle(color: Colors.white)),
+            ),
+            ListTile(
+              onTap: (){Navigator.push(
+                context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
 
               );},
 
               leading: Icon(Ionicons.walk_outline,color: Colors.white),
               title: Text("SignOut",style: TextStyle(color: Colors.white),),
-            )
+            ),
+
           ],
         ),
 

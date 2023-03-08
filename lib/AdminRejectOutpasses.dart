@@ -1,41 +1,30 @@
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:ionicons/ionicons.dart' show Ionicons;
 import 'AdminHeaderDrawer.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
-
-class AdminHome extends StatefulWidget {
-  const AdminHome({Key? key}) : super(key: key);
+class RejectedPass extends StatefulWidget {
+  const RejectedPass({Key? key}) : super(key: key);
 
   @override
-  State<AdminHome> createState() => _AdminHomeState();
+  State<RejectedPass> createState() => _RejectedPassState();
 }
-
 List<String> _cardDataList = [
   "Don C Delish",
+  "ELias T Kurian",
   "Neha Elsa Thomas",
-  "Elias T Kurian",
   "Midhun Krishna",
+
 ];
 
-class _AdminHomeState extends State<AdminHome> {
+class _RejectedPassState extends State<RejectedPass> {
   @override
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
-    void _removeCard(int index) {
-      setState(() {
-        _cardDataList.removeAt(index);
-      });
-    }
-
-    var change = new GreetingChanger.changer("Home");
+    var change = new GreetingChanger.changer("Rejected Passes");
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xffADE8F4),
-        key: scaffoldKey,
-        appBar: AdminAppbar(),
-        drawer: AdminDrawer(),
+      backgroundColor: Color(0xffADE8F4),
+      appBar:AdminAppbar(),
+      drawer: AdminDrawer(),
         body: ListView.builder(
           itemCount: _cardDataList.length,
           itemBuilder: (context, index) {
@@ -43,17 +32,12 @@ class _AdminHomeState extends State<AdminHome> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: Dismissible(
+                  direction: DismissDirection.endToStart,
                   key: UniqueKey(), //change it for demo purposes
                   onDismissed: (direction) => {
                     {
-                      if (direction == DismissDirection.startToEnd)
+                      if (direction == DismissDirection.endToStart)
                         {
-                          // Code for right swipe
-                          print('Swiped right $index')
-                        }
-                      else if (direction == DismissDirection.endToStart)
-                        {
-                          // Code for left swipe
                           print('Swiped left $index')
                         }
                     }
@@ -70,15 +54,15 @@ class _AdminHomeState extends State<AdminHome> {
                         children: [
                           Center(
                               child: Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Text(
-                              "Reject request",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
+                                padding: const EdgeInsets.all(18.0),
+                                child: Text(
+                                  "Reject request",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
                         ],
                       ),
                     ),
@@ -94,15 +78,15 @@ class _AdminHomeState extends State<AdminHome> {
                         children: [
                           Center(
                               child: Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Text(
-                              "Accept request",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
+                                padding: const EdgeInsets.all(18.0),
+                                child: Text(
+                                  "Accept request",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )),
                         ],
                       ),
                     ),
@@ -160,16 +144,16 @@ class _AdminHomeState extends State<AdminHome> {
                                 ),
                                 Center(
                                     child: SizedBox(
-                                  width: 15,
-                                )),
+                                      width: 15,
+                                    )),
                                 Center(
                                     child: Text("at",
                                         style: TextStyle(
                                             color: Color(0xff63BBDA)))),
                                 Center(
                                     child: SizedBox(
-                                  width: 15,
-                                )),
+                                      width: 15,
+                                    )),
                                 Text(
                                   "Kothamangalam",
                                   style: TextStyle(
@@ -266,36 +250,13 @@ class _AdminHomeState extends State<AdminHome> {
                             height: 8,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.end,
                                   children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 12,
-                                        ),
-                                        Text("Reject",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 16,
-                                                color: Color(0xfffa2828))),
-                                        Icon(
-                                          Ionicons.arrow_forward_outline,
-                                          color: Color(0xfffa2828),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "Swipe",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 16,
-                                          color: Colors.white60),
-                                    ),
                                     Row(
                                       children: [
                                         Icon(
