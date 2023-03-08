@@ -38,6 +38,9 @@ dependencies:
   motion_toast: ^2.6.5
   m_toast: ^0.1.8
   cherry_toast: ^1.1.0
+  pretty_qr_code: ^2.0.3
+  ionicons: ^0.2.2
+  simple_gradient_text: ^1.2.4
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'AdminHome.dart';
 import 'UserHome.dart';
 var username = TextEditingController();
 var password = TextEditingController();
@@ -87,6 +88,13 @@ class _LoginPageState extends State<LoginPage> {
                               );
                               username.text="";
                               password.text="";
+                            }
+                            else if(username1=="admin" && password1=="123"){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AdminHome()),
+
+                              );
                             }
                             else{
                               CherryToast.error(

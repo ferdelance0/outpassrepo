@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import 'LoginPage.dart';
 
@@ -64,14 +65,14 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          height: 375,
+          height: 450,
           width: 365,
           decoration: BoxDecoration(
             color: Color(0xff215DA2),
-            borderRadius: BorderRadius.circular(56)
+            borderRadius: BorderRadius.circular(17)
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
                 TextField(
@@ -99,6 +100,16 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                       hintText: 'Username',prefixIcon: Icon(Icons.person_2_rounded)
                   ),
                 ),
+                SizedBox(height: 12,),
+                PrettyQr(
+                  elementColor: Colors.orange,
+                  typeNumber: 1,
+                  size: 200,
+                  data: '12441',
+                  errorCorrectLevel: QrErrorCorrectLevel.M,
+                  roundEdges: true,
+                ),
+
               ],
             ),
           ),
