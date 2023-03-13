@@ -29,7 +29,7 @@ class _AdminFailureState extends State<AdminFailure> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 350,
+                height: 250,
                 child: Center(
                   child: Lottie.network("https://assets6.lottiefiles.com/packages/lf20_A4X8JVF2S6.json",
                       animate: true,
@@ -37,8 +37,8 @@ class _AdminFailureState extends State<AdminFailure> {
                   ),
                 ),
               ),
-              Text("404",style: TextStyle(color: Colors.redAccent,fontSize: 65,fontWeight: FontWeight.bold),),
-              Text("Some Error Occured",style: TextStyle(color: Colors.redAccent,fontSize: 20),),
+              Text("404",style: TextStyle(color: Colors.redAccent,fontSize: 55,fontWeight: FontWeight.bold),),
+              Text("Some Error Occured",style: TextStyle(color: Colors.redAccent,fontSize: 15),),
             ],
           ),
         ),

@@ -7,7 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import 'AdminAddStudents.dart';
 import 'AdminHome.dart';
 import 'AdminRejectOutpasses.dart';
-import 'LoginPage.dart';
+import '../LoginPage.dart';
 
 class AdminDrawer extends StatefulWidget {
   const AdminDrawer({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ListTile(
-              onTap: (){Navigator.push(
+              onTap: (){Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => AdminAddStudents()),
 
@@ -38,7 +38,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
               title: Text("Add new Students",style: TextStyle(color: Colors.white)),
             ),
             ListTile(
-              onTap: (){Navigator.push(
+              onTap: (){Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => AdminHome()),
 
@@ -47,7 +47,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
               title: Text("Outpasses",style: TextStyle(color: Colors.white)),
             ),
             ListTile(
-              onTap: (){Navigator.push(
+              onTap: (){Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => RejectedPass()),
 
@@ -56,7 +56,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
               title: Text("Rejected Outpasses",style: TextStyle(color: Colors.white)),
             ),
             ListTile(
-              onTap: (){Navigator.push(
+              onTap: (){Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
 

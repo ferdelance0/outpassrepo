@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mini/userapplypass.dart';
+import 'package:mini/User/userapplypass.dart';
+
+import 'UserPassHIstory.dart';
 
 class usermain extends StatelessWidget {
   const usermain({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ class usermain extends StatelessWidget {
               InkWell(
                 onTap: (){Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ApplyOutpass()),
+                  MaterialPageRoute(builder: (context) => UserHistory()),
                 );},
                 child: Container(
                   width: 220,
