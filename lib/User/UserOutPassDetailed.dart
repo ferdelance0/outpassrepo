@@ -20,22 +20,35 @@ class _UserOutPassDetailedState extends State<UserOutPassDetailed> {
         child: Column(
           children: [
             Container(
-              child:Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text("Outpass",style: TextStyle(color:Color(0xffFFFFFF)),),
-
-              ),
               width:1000,
               height: 580,
               decoration: BoxDecoration(
                   color: Color(0xff215DA2),
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(30)
+              ),
+              child:Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Outpass",style: TextStyle(color:Color(0xffFFFFFF),fontWeight: FontWeight.bold,fontSize: 23.62),),
+                        SizedBox(width: 24,),
+                        Text("data")
+                      ],
+                    ),
+                    Text("data")
+                  ],
+                ),
+              ),
+
             ),
             MaterialButton(
               onPressed: () {},
               child: Text(
                 "Cancel Outpass",
-                style: TextStyle(color: Color(0xff760000)),
+                style: TextStyle(color: Color(0xff760000),),
               ),
               color: Color(0xffFD5C5C),
               shape: RoundedRectangleBorder(
