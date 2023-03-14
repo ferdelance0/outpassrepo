@@ -5,6 +5,7 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../Admin/AdminHome.dart';
 import '../LoginPage.dart';
+import 'UserOutPassDetailed.dart';
 import 'UserTaskbar.dart';
 
 class ApplyOutpass extends StatefulWidget {
@@ -54,9 +55,6 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                       ),
                     ),
                     SizedBox(height: 5,),
-
-
-
                     Text("Purpose",style: TextStyle(color: Colors.white),),
                     SizedBox(
                       height:70,
@@ -124,7 +122,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                         MaterialButton(onPressed: (){
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => AdminHome()),
+                            MaterialPageRoute(builder: (context) => UserOutPassDetailed()),
 
                           );
                         },child: Text("Submit",style: TextStyle(color: Colors.white),),

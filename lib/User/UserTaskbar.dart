@@ -9,8 +9,7 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget{
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    return
-      AppBar(
+    return       AppBar(
 
     elevation: 0,
     backgroundColor: Colors.transparent,
