@@ -25,7 +25,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               height: 460,
@@ -139,7 +139,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                 ),
               ),
             ),
-            SizedBox(height: 150,)
+
           ],
         ),
       ),
