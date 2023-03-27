@@ -16,6 +16,10 @@ class _SecurityCheckState extends State<SecurityCheck> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0
+      ),
       backgroundColor: Color(0xffADE8F4),
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -26,7 +30,7 @@ class _SecurityCheckState extends State<SecurityCheck> {
             children: [
               Container(
                 width: 1000,
-                height: 528,
+                height: 518,
                 decoration: BoxDecoration(
                     color: Color(0xff215DA2),
                     borderRadius: BorderRadius.circular(30)),
@@ -60,14 +64,8 @@ class _SecurityCheckState extends State<SecurityCheck> {
                             style: TextStyle(
                                 color: Color(0xffFFFFFF), fontSize: 16),
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(Icons.file_download, color: Colors.blue),
+                          
                         ],
-                      ),
-                      SizedBox(
-                        width: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -84,7 +82,7 @@ class _SecurityCheckState extends State<SecurityCheck> {
                           )
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 5),
                       Text(
                         "Don C Delish",
                         style: TextStyle(
@@ -187,11 +185,16 @@ class _SecurityCheckState extends State<SecurityCheck> {
                 ),
               ),
               SizedBox(height: 25,),
-              Text("Student Status $_presence"),
-              SwitcherButton(
+              Text("Student Status $_presence",style: TextStyle(
+                fontSize: 18,
+                color: Color(0xff206500),
+              ),),
+
+              SizedBox(height: 15,),              SwitcherButton(
                 onColor: Colors.greenAccent,
                 offColor: Colors.redAccent,
                 value: true,
+                size: 75,
                 onChange: (value) {
                   if(value==true)
                     setState(() {
