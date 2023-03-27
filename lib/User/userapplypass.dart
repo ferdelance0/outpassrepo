@@ -26,6 +26,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          //nnj
           children: [
             Container(
               height: 460,
