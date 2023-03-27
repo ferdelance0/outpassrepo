@@ -3,6 +3,7 @@ import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mini/security/SecurityHome.dart';
 import 'Admin/AdminHome.dart';
 import 'User/UserHome.dart';
 var username = TextEditingController();
@@ -97,6 +98,12 @@ class _LoginPageState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(builder: (context) => AdminHome()),
 
+                                );
+                              }
+                              else if(username1=="sec" && password1=="123"){
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => QRCodeScannerPage()),
                                 );
                               }
                               else{

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini/User/usermain.dart';
 import 'package:mini/security/SecurityHome.dart';
-import 'package:mini/security/qrscanner.dart';
+import 'package:mini/security/referencefileforqrscanner.dart';
 import 'LoginPage.dart';
 void main() {
   Widget _userwidget = usermain();
