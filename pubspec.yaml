@@ -44,6 +44,8 @@ dependencies:
   date_field: ^3.0.2
   qr_code_scanner: ^1.0.1
   ai_barcode_scanner: ^0.0.4
+  lite_rolling_switch: ^1.0.0
+  switcher_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:

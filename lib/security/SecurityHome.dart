@@ -95,7 +95,10 @@ var admnno = TextEditingController();
               ),
               elevation: 0,
               color: Color(0xff03045E),
-              onPressed: () {},
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecurityCheck(scannedText: admnno.text!)),
+              );},
               child: Text('Submit',style: TextStyle(color: Colors.white,fontSize: 18.58,fontWeight: FontWeight.w100),),
             ),
 
