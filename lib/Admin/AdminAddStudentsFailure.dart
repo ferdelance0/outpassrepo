@@ -37,7 +37,6 @@ class _AdminFailureState extends State<AdminFailure> {
                   ),
                 ),
               ),
-              Text("404",style: TextStyle(color: Colors.redAccent,fontSize: 55,fontWeight: FontWeight.bold),),
               Text("Some Error Occured",style: TextStyle(color: Colors.redAccent,fontSize: 15),),
             ],
           ),
