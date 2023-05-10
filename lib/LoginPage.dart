@@ -106,7 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                                 BlocProvider.of<LoginBloc>(context).add(
                                 VerifyPassword(
                                 username: username.text,
-                                password: password.text));
+                                password: password.text)
+                                );
                                 },
                             child: BlocConsumer<LoginBloc,LoginStates>(
                               listener: (context,state){
@@ -120,6 +121,12 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => UserHome()),
+                                  );
+                                }
+                                if(state is LoginSuccessSec){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => QRCodeScannerPage()),
                                   );
                                 }
                                 if (state is LoginError){
@@ -147,53 +154,8 @@ class _LoginPageState extends State<LoginPage> {
                                 else{
                                   return Text('Submit',style: TextStyle(color: Colors.white,fontSize: 18.58,fontWeight: FontWeight.w100));
                                 }
-
-
-
-
-
                               }
-
                               )
-                               // loginfn();
-                            //
-                            //   var username1 = username.text;
-                            //   var password1 = password.text;
-                            //   if(username1=="user" && password1=="123"){
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(builder: (context) => UserHome()),
-                            //
-                            //     );
-                            //     username.text="";
-                            //     password.text="";
-                            //   }
-                            //   else if(username1=="admin" && password1=="123"){
-                            //     Navigator.pushReplacement(
-                            //       context,
-                            //       MaterialPageRoute(builder: (context) => AdminHome()),
-                            //
-                            //     );
-                            //   }
-                            //   else if(username1=="sec" && password1=="123"){
-                            //     Navigator.pushReplacement(
-                            //       context,
-                            //       MaterialPageRoute(builder: (context) => QRCodeScannerPage()),
-                            //     );
-                            //   }
-                            //   else{
-                            //     CherryToast.error(
-                            //       title: Text(''),
-                            //       enableIconAnimation: false,
-                            //       displayTitle: false,
-                            //       description: Text('Invalid account information',style: TextStyle(fontSize: 12),),
-                            //       toastPosition: Position.top,
-                            //       animationDuration: Duration(milliseconds: 500),
-                            //       toastDuration: Duration(milliseconds: 1500),
-                            //       autoDismiss: true,
-                            //     ).show(context);
-                            //
-
                            ,
                           ),
                         ),
