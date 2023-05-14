@@ -10,7 +10,6 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsStates> {
       try {
         emit(DetailsLoading());
         final Details = await _apiRepository.fetchStudentDetails();
-        print(Details.data1);
         emit(DetailsLoaded(Details));
         if (Details.error != null) {
           emit(DetailsError(Details.error));

@@ -30,7 +30,7 @@ class _UserHomeState extends State<UserHome> {
     token = prefs.getString('token');
     if (token != null) {
       decodedToken = await JwtDecoder.decode(token);
-      print(decodedToken["ad"]);
+      // print(decodedToken["ad"]);
     }
     setState(() {
       isLoading = false;
