@@ -52,6 +52,9 @@ dependencies:
   overlay_support: ^2.0.1
   flutter_bloc: ^8.1.2
   loading_animation_widget: ^1.2.0+2
+  dio:
+  equatable:
+
 
 dev_dependencies:
   flutter_test:

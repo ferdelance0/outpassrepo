@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isNotValidate = false;
   late SharedPreferences prefs;
+  bool isTextFieldenable = true;
 
   @override
   void initState() {
@@ -61,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       width:  MediaQuery.of(context).size.width * 1,
                       child: TextField(
+                        enabled: isTextFieldenable,
                         controller: username,
                         decoration: InputDecoration(
                             filled: true,
@@ -78,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                       width:  MediaQuery.of(context).size.width * .9555,
                       child: TextField(obscureText: true,
                         controller: password,
+                        enabled: isTextFieldenable,
                         decoration: InputDecoration(
 
                             filled: true,
@@ -103,6 +106,9 @@ class _LoginPageState extends State<LoginPage> {
                             elevation: 0,
                             color: Color(0xff03045E),
                             onPressed: () {
+                              setState(() {
+                                isTextFieldenable = false;
+                              });
                                 BlocProvider.of<LoginBloc>(context).add(
                                 VerifyPassword(
                                 username: username.text,
@@ -130,6 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                                 if (state is LoginError){
+                                  setState(() {
+                                    isTextFieldenable = true;
+                                  });
                                   CherryToast.error(
                                     title: Text(''),
                                     enableIconAnimation: false,
