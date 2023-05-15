@@ -1,10 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart';
 import 'package:ionicons/ionicons.dart';
 import 'AdminHeaderDrawer.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
-
+AcceptingRequest(){
+  print("map");
+}
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
 
@@ -46,8 +49,19 @@ class _AdminHomeState extends State<AdminHome> {
               return SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: Dismissible(
-                    key: UniqueKey(), //change it for demo purposes
+                  child: DismissibleTile(
+                    key: UniqueKey(),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    delayBeforeResize: const Duration(milliseconds: 500),
+                    ltrBackground: const ColoredBox(color: Color(0xff023E8A)),
+                    rtlBackground: const ColoredBox(color: Color(0xff2B6AB9)),
+                    ltrDismissedColor: Color(0xffFE0944),
+                    rtlDismissedColor: const Color(0xff00ff56),
+                    ltrOverlay: AcceptReq(ab: index.toString()) ,
+                    ltrOverlayDismissed: const Text('Added'),
+                    rtlOverlay: const Text('Delete'),
+                    rtlOverlayDismissed: const Text('Deleted'),//change it for demo purposes
                     onDismissed: (direction) => {
                       {
                         if (direction == DismissDirection.startToEnd)
@@ -62,55 +76,55 @@ class _AdminHomeState extends State<AdminHome> {
                           }
                       }
                     },
-                    background: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(21),
-                          color: Color(0xffFE0944),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Center(
-                                child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Text(
-                                "Reject request",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    secondaryBackground: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(21),
-                            color: Color(0xff00ff56)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Center(
-                                child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Text(
-                                "Accept request",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // background: Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(21),
+                    //       color: Color(0xffFE0944),
+                    //     ),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.start,
+                    //       children: [
+                    //         Center(
+                    //             child: Padding(
+                    //           padding: const EdgeInsets.all(18.0),
+                    //           child: Text(
+                    //             "Reject request",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 15,
+                    //                 fontWeight: FontWeight.bold),
+                    //           ),
+                    //         )),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    // secondaryBackground: Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(21),
+                    //         color: Color(0xff00ff56)),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.end,
+                    //       children: [
+                    //         Center(
+                    //             child: Padding(
+                    //           padding: const EdgeInsets.all(18.0),
+                    //           child: Text(
+                    //             "Accept request",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 fontSize: 15,
+                    //                 fontWeight: FontWeight.bold),
+                    //           ),
+                    //         )),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
 
                     child: Container(
                         decoration: BoxDecoration(
@@ -336,5 +350,15 @@ class _AdminHomeState extends State<AdminHome> {
           )
       ),
     );
+  }
+}
+class AcceptReq extends StatelessWidget {
+  final  ab;
+  const AcceptReq({Key? key,this.ab}) : super(key: key);
+  @override
+  void pritn(){print("slkdnf");}
+  Widget build(BuildContext context) {
+    pritn();
+    return Text(ab );
   }
 }
