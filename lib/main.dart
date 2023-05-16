@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Outpass',
+              //prr
               theme: ThemeData(
                 focusColor: Color(0xff215DA2),
                 fontFamily: "Poppins",
