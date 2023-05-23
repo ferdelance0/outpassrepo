@@ -1,18 +1,18 @@
 class DetailsModel {
   bool? status;
-  List<Data1>? data1;
+  List<Data2>? data2;
   String? error;
 
-  DetailsModel({this.status, this.data1});
+  DetailsModel({this.status, this.data2});
   DetailsModel.withError(String errorMessage){
     error = errorMessage;
   }
   DetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    if (json['data1'] != null) {
-      data1 = <Data1>[];
-      json['data1'].forEach((v) {
-        data1!.add(new Data1.fromJson(v));
+    if (json['data2'] != null) {
+      data2 = <Data2>[];
+      json['data2'].forEach((v) {
+        data2!.add(new Data2.fromJson(v));
       });
     }
   }
@@ -20,14 +20,14 @@ class DetailsModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    if (this.data1 != null) {
-      data['data1'] = this.data1!.map((v) => v.toJson()).toList();
+    if (this.data2 != null) {
+      data['data2'] = this.data2!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data1 {
+class Data2 {
   String? sId;
   String? name;
   int? ad;
@@ -35,9 +35,9 @@ class Data1 {
   String? semester;
   int? iV;
 
-  Data1({this.sId, this.name, this.ad, this.contactno, this.semester, this.iV});
+  Data2({this.sId, this.name, this.ad, this.contactno, this.semester, this.iV});
 
-  Data1.fromJson(Map<String, dynamic> json) {
+  Data2.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     ad = json['ad'];

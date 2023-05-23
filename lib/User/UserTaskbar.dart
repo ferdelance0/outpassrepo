@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import '../LoginPage.dart';
 
 class UserAppbar extends StatelessWidget implements PreferredSizeWidget{
-  UserAppbar({Key? key}) : super(key: key);
+  final String? name;
+  final String pgtitle;
+  UserAppbar({Key? key,required this.name,required this.pgtitle}) : super(key: key);
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    return       AppBar(
+    return
+      AppBar(
 
     elevation: 0,
     backgroundColor: Colors.transparent,
@@ -23,14 +26,14 @@ class UserAppbar extends StatelessWidget implements PreferredSizeWidget{
     width: 15,
     ),
     Text(
-    "Hello User",
+    "Hello ${name}",
     style: TextStyle(color: Colors.black),
     ),
     SizedBox(
     width: 8,
     ),
     Text(
-    "Home",
+    pgtitle,
     style: TextStyle(color: Colors.black, fontSize: 12),
     )
     ],

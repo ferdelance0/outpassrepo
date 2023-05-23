@@ -29,7 +29,7 @@ class _UserHistoryState extends State<UserHistory> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xffADE8F4),
-      appBar: UserAppbar(),
+      appBar: UserAppbar(name: "name",pgtitle: "Outpass History",),
       body: ListView.builder(
         itemCount: 3,
         itemBuilder: (context, index) {

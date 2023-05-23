@@ -58,7 +58,7 @@ class _AdminHomeState extends State<AdminHome> {
                     rtlBackground: const ColoredBox(color: Color(0xff2B6AB9)),
                     ltrDismissedColor: Color(0xffFE0944),
                     rtlDismissedColor: const Color(0xff00ff56),
-                    ltrOverlay: AcceptReq(ab: index.toString()) ,
+                    ltrOverlay: Text("Add") ,
                     ltrOverlayDismissed: const Text('Added'),
                     rtlOverlay: const Text('Delete'),
                     rtlOverlayDismissed: const Text('Deleted'),//change it for demo purposes
@@ -356,9 +356,11 @@ class AcceptReq extends StatelessWidget {
   final  ab;
   const AcceptReq({Key? key,this.ab}) : super(key: key);
   @override
-  void pritn(){print("slkdnf");}
+  Future<void> pritn() async {
+   await Future.delayed(Duration(seconds: 9));
+    print("slkdnf");
+  }
   Widget build(BuildContext context) {
-    pritn();
     return Text(ab );
   }
 }

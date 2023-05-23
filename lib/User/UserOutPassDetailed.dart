@@ -18,7 +18,7 @@ class _UserOutPassDetailedState extends State<UserOutPassDetailed> {
     return Scaffold(
       backgroundColor: Color(0xffADE8F4),
       resizeToAvoidBottomInset: false,
-      appBar: UserAppbar(),
+      appBar: UserAppbar(name: "name",pgtitle: "Outpass Detailed",),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(

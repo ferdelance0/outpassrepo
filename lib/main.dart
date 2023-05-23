@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mini/User/usermain.dart';
 import 'package:bloc/bloc.dart';
+import 'package:mini/Bloc/ApplyOpBloc.dart';
 import 'package:mini/security/SecurityHome.dart';
 import 'package:mini/security/referencefileforqrscanner.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Bloc/LoginBloc.dart';
 import 'LoginPage.dart';
+import 'User/UserHome.dart';
 
 void main() {
   SharedPreferences prefs;
-  Widget _userwidget = usermain();
   runApp(const MyApp());
 
 }
@@ -27,6 +27,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(),
           ),
+              BlocProvider<ApplyOpBloc>(
+                create: (context) => ApplyOpBloc(),
+              ),
         ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

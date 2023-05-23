@@ -1,6 +1,11 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:mini/Bloc/ApplyOpBloc.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../Admin/AdminHome.dart';
@@ -9,19 +14,28 @@ import 'UserOutPassDetailed.dart';
 import 'UserTaskbar.dart';
 
 class ApplyOutpass extends StatefulWidget {
-  const ApplyOutpass({Key? key}) : super(key: key);
+  final String? name;
+  final int? ad;
+
+  ApplyOutpass({Key? key,required int? this.ad,required String? this.name}) : super(key: key);
 
   @override
   State<ApplyOutpass> createState() => _ApplyOutpassState();
 }
 
 class _ApplyOutpassState extends State<ApplyOutpass> {
+  final ApplyOpBloc _applyOpBloc = ApplyOpBloc();
+  final Destination = TextEditingController();
+  final Purpose = TextEditingController();
+   var DateAndTimeOfLeaving ;
+   var DateAndTimeOfArrival ;
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xffADE8F4),
-      appBar:UserAppbar(),
+      appBar:UserAppbar(name: widget.name,pgtitle: "New Outpass",),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -46,6 +60,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                     SizedBox(
                       height:70,
                       child: TextField(
+                        controller: Destination,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Color(0xffB4E3EC),
@@ -60,6 +75,8 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                     SizedBox(
                       height:70,
                       child: TextField(
+
+                        controller: Purpose,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color(0xffB4E3EC),
@@ -90,11 +107,12 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                         autovalidateMode: AutovalidateMode.always,
                         validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
                         onDateSelected: (DateTime value) {
-                          print(value);
+                          var Date =value.toString();
+                          DateAndTimeOfLeaving=Date;
                         },
                       ),
                     ),
-                    Text("Date and Time of Leaving",style: TextStyle(color: Colors.white),),
+                    Text("Date and Time of Arrival",style: TextStyle(color: Colors.white),),
                     SizedBox(
                       height:70,
                       child: DateTimeFormField(
@@ -112,7 +130,8 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                         autovalidateMode: AutovalidateMode.always,
                         validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
                         onDateSelected: (DateTime value) {
-                          print(value);
+                          var Date =value.toString();
+                          DateAndTimeOfArrival=Date;
                         },
                       ),
                     ),
@@ -121,12 +140,48 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MaterialButton(onPressed: (){
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => UserOutPassDetailed()),
+                        BlocProvider.of<ApplyOpBloc>(context).add(
+                        ApplyPush(
+                          ad:widget.ad.toString(),
+                          Destination: Destination.text,
+                          Purpose: Purpose.text,
+                          Dateofleaving: DateAndTimeOfLeaving,
+                          Dateofreturn: DateAndTimeOfArrival
+                        )
+                        );
 
-                          );
-                        },child: Text("Submit",style: TextStyle(color: Colors.white),),
+                        },child: BlocConsumer<ApplyOpBloc,ApplyOpStates>(
+                          listener: (context,state){
+                            if(state is ApplyOpLoading){
+
+                            }
+                            if(state is ApplyOpError){
+                              CherryToast.error(
+                                title: Text(''),
+                                enableIconAnimation: false,
+                                displayTitle: false,
+                                description: Text(state.error!,style: TextStyle(fontSize: 12),),
+                                toastPosition: Position.bottom,
+                                animationDuration: Duration(milliseconds: 500),
+                                toastDuration: Duration(milliseconds: 1500),
+                                autoDismiss: true,
+                              ).show(context);
+                            }
+
+                          },
+                          builder: (context,state){
+                            if(state is ApplyOpSuccess){
+                            }
+                            if(state is ApplyOpLoading){
+                              return LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 30);
+                            }
+                            else{
+                              return Text("GEee");
+                            }
+                            return Text("GEee");
+                          },
+                        ),
+
                           height: 43.12 ,
                           minWidth: 133.62,
                           shape: RoundedRectangleBorder(

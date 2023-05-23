@@ -66,7 +66,7 @@ class _UserHomeState extends State<UserHome> {
                     Builder(
                       builder: (context) {
                         return Text(
-                          "Hello ",
+                          "Hello ${name ?? "" }",
                           style: TextStyle(color: Colors.black),
                         );
                       },
@@ -75,7 +75,7 @@ class _UserHomeState extends State<UserHome> {
                       width: 8,
                     ),
                     Text(
-                      "${name ?? "" }${ad}",
+                      "Home",
                       style: TextStyle(color: Colors.black, fontSize: 12),
                     )
                   ],
@@ -104,8 +104,9 @@ class _UserHomeState extends State<UserHome> {
               listener: (context, state) {
                 if (state is DetailsLoaded) {
                   setState(() {
-                    name = state.details.data1?[0].name;
-                    ad=(state.details.data1?[0].ad);
+                    name = state.details.data2?[0].name;
+                    ad=(state.details.data2?[0].ad);
+                    print(ad);
                   });
                   // print(name);
                   // print(ad);
@@ -127,7 +128,7 @@ class _UserHomeState extends State<UserHome> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ApplyOutpass()),
+                                  builder: (context) => ApplyOutpass(ad: ad,name: name,)),
                             );
                           },
                           child: Container(
