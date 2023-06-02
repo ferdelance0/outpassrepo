@@ -6,12 +6,16 @@ import 'package:mini/security/SecurityHome.dart';
 import 'package:mini/security/referencefileforqrscanner.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Bloc/LatestOpBloc.dart';
 import 'Bloc/LoginBloc.dart';
 import 'LoginPage.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'User/UserHome.dart';
 
 void main() {
   SharedPreferences prefs;
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 
 }
@@ -29,6 +33,9 @@ class MyApp extends StatelessWidget {
           ),
               BlocProvider<ApplyOpBloc>(
                 create: (context) => ApplyOpBloc(),
+              ),
+              BlocProvider<LatestOpBloc>(
+                create: (context) => LatestOpBloc(),
               ),
         ],
             child: MaterialApp(

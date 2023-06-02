@@ -54,8 +54,6 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-
                     Text("Destination",style: TextStyle(color: Colors.white),),
                     SizedBox(
                       height:70,
@@ -93,6 +91,8 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                     SizedBox(
                       height:70,
                       child: DateTimeFormField(
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Color(0xffB4E3EC),
@@ -116,6 +116,8 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                     SizedBox(
                       height:70,
                       child: DateTimeFormField(
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Color(0xffB4E3EC),
@@ -126,6 +128,7 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                           ),
                           suffixIcon: Icon(Icons.event_note),
                         ),
+
                         mode: DateTimeFieldPickerMode.dateAndTime,
                         autovalidateMode: AutovalidateMode.always,
                         validator: (e) => (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
@@ -152,6 +155,18 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
 
                         },child: BlocConsumer<ApplyOpBloc,ApplyOpStates>(
                           listener: (context,state){
+                            if(state is ApplyOpSuccess){
+                              CherryToast.success(
+                                title: Text(''),
+                                enableIconAnimation: false,
+                                displayTitle: false,
+                                description: Text("Outpass Application Submitted",style: TextStyle(fontSize: 12),),
+                                toastPosition: Position.bottom,
+                                animationDuration: Duration(milliseconds: 500),
+                                toastDuration: Duration(milliseconds: 1500),
+                                autoDismiss: true,
+                              ).show(context);
+                            }
                             if(state is ApplyOpLoading){
 
                             }
@@ -171,12 +186,13 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                           },
                           builder: (context,state){
                             if(state is ApplyOpSuccess){
+
                             }
                             if(state is ApplyOpLoading){
                               return LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 30);
                             }
                             else{
-                              return Text("GEee");
+                              return Text("Submit", style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.w100));
                             }
                             return Text("GEee");
                           },

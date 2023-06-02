@@ -14,7 +14,7 @@ import 'Admin/AdminHome.dart';
 import 'Bloc/LoginBloc.dart';
 import 'User/UserHome.dart';
 
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -34,7 +34,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     // TODO: implement initState
+
     initSharedPref();
+    initialization();
+  }
+
+  void initialization() async {
+    //splash screen odumbo enthekilum proccess venemenkil ivide ittal mathiyakum
+    FlutterNativeSplash.remove();
   }
   Future<void> initSharedPref() async {
     prefs=await SharedPreferences.getInstance();

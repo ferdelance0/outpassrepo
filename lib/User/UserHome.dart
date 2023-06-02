@@ -162,7 +162,7 @@ class _UserHomeState extends State<UserHome> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => UserHistory()),
+                                  builder: (context) => UserHistory(ad: ad,name: name,semester: sem)),
                             );
                           },
                           child: Container(
