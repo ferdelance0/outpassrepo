@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mini/User/userapplypass.dart';
 import 'package:mini/Bloc/LoginBloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,7 @@ import '../models/DetailsModel.dart';
 import 'UserPassHIstory.dart';
 
 class UserHome extends StatefulWidget {
-  const UserHome({Key? key}) : super(key: key);
+  const UserHome({Key? key, String? name}) : super(key: key);
 
   @override
   State<UserHome> createState() => _UserHomeState();
@@ -19,6 +20,8 @@ class UserHome extends StatefulWidget {
 class _UserHomeState extends State<UserHome> {
   var token;
   String? name = "";
+  String? homeString="";
+  String? helloString="";
   int? ad;
   String? sem="";
   final DetailsBloc _detailsBloc = DetailsBloc();
@@ -66,7 +69,7 @@ class _UserHomeState extends State<UserHome> {
                     Builder(
                       builder: (context) {
                         return Text(
-                          "Hello ${name ?? "" }",
+                          "${helloString ?? "" } ${name ?? "" }",
                           style: TextStyle(color: Colors.black),
                         );
                       },
@@ -75,7 +78,7 @@ class _UserHomeState extends State<UserHome> {
                       width: 8,
                     ),
                     Text(
-                      "Home",
+                     " ${homeString ?? "" }",
                       style: TextStyle(color: Colors.black, fontSize: 12),
                     )
                   ],
@@ -100,12 +103,14 @@ class _UserHomeState extends State<UserHome> {
               )
             ],
           ),
-          body: BlocListener<DetailsBloc, DetailsStates>(
+          body: BlocConsumer<DetailsBloc, DetailsStates>(
               listener: (context, state) {
                 if (state is DetailsLoaded) {
                   setState(() {
                     name = state.details.data2?[0].name;
                     ad=(state.details.data2?[0].ad);
+                    helloString = "Hello";
+                    homeString = "Home";
                     print(ad);
                   });
                   // print(name);
@@ -116,88 +121,96 @@ class _UserHomeState extends State<UserHome> {
                   // print("sff");
                 }
               },
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
+              builder: (context,state){
+                if(state is DetailsLoaded){
+                  return Container(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ApplyOutpass(ad: ad,name: name,)),
-                            );
-                          },
-                          child: Container(
-                            width: 220,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xff215DA2),
-                              borderRadius: BorderRadius.circular(56),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add_box, color: Colors.white),
-                                SizedBox(
-                                  width: 10,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ApplyOutpass(ad: ad,name: name,)),
+                                );
+                              },
+                              child: Container(
+                                width: 220,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff215DA2),
+                                  borderRadius: BorderRadius.circular(56),
                                 ),
-                                Text(
-                                  "Apply For new Outpass",
-                                  style: TextStyle(
-                                      fontSize: 12.57, color: Colors.white),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 17,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserHistory(ad: ad,name: name,semester: sem)),
-                            );
-                          },
-                          child: Container(
-                            width: 220,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: Color(0xff215DA2),
-                              borderRadius: BorderRadius.circular(56),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 22,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add_box, color: Colors.white),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Apply For new Outpass",
+                                      style: TextStyle(
+                                          fontSize: 12.57, color: Colors.white),
+                                    )
+                                  ],
                                 ),
-                                Icon(Icons.document_scanner_outlined,
-                                    color: Colors.white),
-                                SizedBox(
-                                  width: 21,
-                                ),
-                                Text("Outpass History",
-                                    style: TextStyle(
-                                        fontSize: 13.57, color: Colors.white))
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 36,
+                            SizedBox(
+                              height: 17,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UserHistory(ad: ad,name: name,semester: sem)),
+                                );
+                              },
+                              child: Container(
+                                width: 220,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff215DA2),
+                                  borderRadius: BorderRadius.circular(56),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 22,
+                                    ),
+                                    Icon(Icons.document_scanner_outlined,
+                                        color: Colors.white),
+                                    SizedBox(
+                                      width: 21,
+                                    ),
+                                    Text("Outpass History",
+                                        style: TextStyle(
+                                            fontSize: 13.57, color: Colors.white))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 36,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              )),
+                  );
+                }
+                else{
+                  return Center(child: LoadingAnimationWidget.flickr(leftDotColor: Colors.white, rightDotColor: Colors.indigo, size: 30));
+                }
+              }
+          ),
         ));
   }
 }

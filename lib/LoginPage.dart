@@ -11,6 +11,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mini/security/SecurityHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Admin/AdminHome.dart';
+import 'Bloc/DetailsBloc.dart';
 import 'Bloc/LoginBloc.dart';
 import 'User/UserHome.dart';
 
@@ -25,16 +26,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var username = TextEditingController();
   var password = TextEditingController();
-
-
-  bool _isNotValidate = false;
   late SharedPreferences prefs;
   bool isTextFieldenable = true;
-
   @override
   void initState() {
-    // TODO: implement initState
-
     initSharedPref();
     initialization();
   }
@@ -48,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   Widget build(BuildContext context) {
+
     return  WillPopScope(
       onWillPop: () async {
         return false;
@@ -131,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                                 if(state is LoginSuccessUser){
+
                                   Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => UserHome()),
