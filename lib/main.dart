@@ -6,8 +6,10 @@ import 'package:mini/security/SecurityHome.dart';
 import 'package:mini/security/referencefileforqrscanner.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Bloc/AcceptOpBloc.dart';
 import 'Bloc/LatestOpBloc.dart';
 import 'Bloc/LoginBloc.dart';
+import 'Bloc/RejectOpBloc.dart';
 import 'LoginPage.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'User/UserHome.dart';
@@ -36,6 +38,12 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider<LatestOpBloc>(
                 create: (context) => LatestOpBloc(),
+              ),
+              BlocProvider<AcceptOpBloc>(
+                create: (context) => AcceptOpBloc(),
+              ),
+              BlocProvider<RejectOpBloc>(
+                create: (context) => RejectOpBloc(),
               ),
         ],
             child: MaterialApp(

@@ -121,20 +121,19 @@ class _LoginPageState extends State<LoginPage> {
                             child: BlocConsumer<LoginBloc,LoginStates>(
                               listener: (context,state){
                                 if(state is LoginSuccessAdmin){
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(builder: (context) => AdminHome()),
                                   );
                                 }
                                 if(state is LoginSuccessUser){
-
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(builder: (context) => UserHome()),
                                   );
                                 }
                                 if(state is LoginSuccessSec){
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(builder: (context) => QRCodeScannerPage()),
                                   );

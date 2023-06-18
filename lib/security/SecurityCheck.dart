@@ -1,16 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:switcher_button/switcher_button.dart';
+
+import '../Bloc/DetailsBloc.dart';
 
 class SecurityCheck extends StatefulWidget {
 
   final String scannedText;
   const SecurityCheck({Key? key,required this.scannedText}) : super(key: key);@override
   State<SecurityCheck> createState() => _SecurityCheckState();
+
 }
 
+
 class _SecurityCheckState extends State<SecurityCheck> {
+  @override
+  void initState() {
+  }
   @override
   String _presence="Present";
   Widget build(BuildContext context) {

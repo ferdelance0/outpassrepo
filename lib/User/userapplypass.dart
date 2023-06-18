@@ -16,8 +16,9 @@ import 'UserTaskbar.dart';
 class ApplyOutpass extends StatefulWidget {
   final String? name;
   final int? ad;
+  final String? semester;
 
-  ApplyOutpass({Key? key,required int? this.ad,required String? this.name}) : super(key: key);
+  ApplyOutpass({Key? key,required int? this.ad,required String? this.name,this.semester}) : super(key: key);
 
   @override
   State<ApplyOutpass> createState() => _ApplyOutpassState();
@@ -154,9 +155,9 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                         );
 
                         },child: BlocConsumer<ApplyOpBloc,ApplyOpStates>(
-                          listener: (context,state){
+                          listener: (context,state) async {
                             if(state is ApplyOpSuccess){
-                              CherryToast.success(
+                              await CherryToast.success(
                                 title: Text(''),
                                 enableIconAnimation: false,
                                 displayTitle: false,
@@ -165,7 +166,11 @@ class _ApplyOutpassState extends State<ApplyOutpass> {
                                 animationDuration: Duration(milliseconds: 500),
                                 toastDuration: Duration(milliseconds: 1500),
                                 autoDismiss: true,
-                              ).show(context);
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UserOutPassDetailed(name: widget.name,ad: widget.ad,semester: widget.semester,)),
+                              );
                             }
                             if(state is ApplyOpLoading){
 

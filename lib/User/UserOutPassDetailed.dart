@@ -1,3 +1,5 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,14 +8,16 @@ import 'package:mini/Admin/AdminAddStudents.dart';
 import 'package:mini/models/LatestOpModel.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:intl/intl.dart';
+import '../Bloc/DeleteOpBloc.dart';
 import '../Bloc/LatestOpBloc.dart';
 import 'UserTaskbar.dart';
 
 class UserOutPassDetailed extends StatefulWidget {
-  final String? name,semester;
+  final String? name, semester;
   final int? ad;
 
-  const UserOutPassDetailed({Key? key, this.name, this.ad,this.semester}) : super(key: key);
+  const UserOutPassDetailed({Key? key, this.name, this.ad, this.semester})
+      : super(key: key);
 
   @override
   State<UserOutPassDetailed> createState() => _UserOutPassDetailedState();
@@ -21,12 +25,15 @@ class UserOutPassDetailed extends StatefulWidget {
 
 class _UserOutPassDetailedState extends State<UserOutPassDetailed> {
   bool _showQr = false;
+  bool fer = true;
   final LatestOpBloc _latestOpBloc = new LatestOpBloc();
+  final DeleteBloc _DeleteBloc = new DeleteBloc();
   @override
   void initState() {
     // TODO: implement initState
     _latestOpBloc.add(GetLatestDetails());
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffADE8F4),
@@ -81,57 +88,96 @@ class _UserOutPassDetailedState extends State<UserOutPassDetailed> {
                     ),
                   ),
                   replacement: BlocProvider<LatestOpBloc>(
-                    create:  (_) => _latestOpBloc,
-                      child: BlocListener<LatestOpBloc,LatestOpStates>(
-                        listener: (context,state)=>{},
-
-                      child: BlocBuilder<LatestOpBloc,LatestOpStates>(
-                        builder: (context,state){
-                          if (state is LatestLoading){
-                            return Container(
-                              width: 1000,
-                              height: 528,
-                              decoration: BoxDecoration(
-                                color: Color(0xff215DA2),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Center(child: LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 50))
-                            );
-                          }
-                          else if(state is LatestError){
-                            return Container(
+                      create: (_) => _latestOpBloc,
+                      child: BlocListener<LatestOpBloc, LatestOpStates>(
+                        listener: (context, state) => {},
+                        child: BlocBuilder<LatestOpBloc, LatestOpStates>(
+                          builder: (context, state) {
+                            if (state is LatestLoading) {
+                              return Container(
+                                  width: 1000,
+                                  height: 528,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff215DA2),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                      child: LoadingAnimationWidget
+                                          .staggeredDotsWave(
+                                              color: Colors.white, size: 50)));
+                            } else if (state is LatestError) {
+                              return Container(
                                 width: 1000,
                                 height: 528,
                                 decoration: BoxDecoration(
                                   color: Color(0xff215DA2),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
-                              child: Text("Error jas Occured while retrieving info"),
-                            );
-                          }
-                          else if(state is LatestLoaded){
-                            print(state.Details.data1?.opStatus);
-                            return _buildLoad(state.Details,name: widget.name,ad: widget.ad,semester: widget.semester);
-                          }
-                          else{
-                            return Text("404");
-                          }
-                        },
-                      ),
-                      )
-                  ),
+                                child: Text(
+                                    "Error jas Occured while retrieving info"),
+                              );
+                            } else if (state is LatestLoaded) {
+                              if(state.Details.status == "Expired"){
+                                setState(() {
+                                  fer = false;
+                                });
+                              }
+                              return _buildLoad(state.Details,
+                                  name: widget.name,
+                                  ad: widget.ad,
+                                  semester: widget.semester);
+                            } else {
+                              return Text("404");
+                            }
+                          },
+                        ),
+                      )),
                 ),
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  _DeleteBloc.add(GetDelete());
                 },
-                child: Text(
-                  "Cancel Outpass",
-                  style: TextStyle(
-                    color: Color(0xff760000),
-                  ),
-                ),
+                child: BlocProvider<DeleteBloc>(
+                    create: (_) => _DeleteBloc,
+                    child: BlocListener<DeleteBloc, DeleteStates>(
+                      listener: (context, state) async => {
+                        if (state is DeleteLoaded)
+                          {
+                            CherryToast.success(
+                              title: Text(''),
+                              enableIconAnimation: false,
+                              displayTitle: false,
+                              description: Text(
+                                'Invalid account information',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              toastPosition: Position.bottom,
+                              animationDuration: Duration(milliseconds: 500),
+                              toastDuration: Duration(milliseconds: 1500),
+                              autoDismiss: true,
+                            ).show(context),
+                            await Future.delayed(
+                                Duration(milliseconds: 2000)),
+                            Navigator.pop(context),
+                          }
+                      },
+                      child: BlocBuilder<DeleteBloc, DeleteStates>(
+                        builder: (context, state) {
+                          if (state is DeleteLoading) {
+                            return LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 30,
+                            );
+                          } else {
+                            return Text("Cancel Outpass",
+                                style: TextStyle(
+                                  color: Color(0xff760000),
+                                ));
+                          }
+                        },
+                      ),
+                    )),
                 color: Color(0xffFD5C5C),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(23),
@@ -145,8 +191,9 @@ class _UserOutPassDetailedState extends State<UserOutPassDetailed> {
     );
   }
 }
-Widget _buildLoad(LatestOpModel details, {String? name, int? ad,String? semester}){
 
+Widget _buildLoad(LatestOpModel details,
+    {String? name, int? ad, String? semester}) {
   return Container(
     width: 1000,
     height: 528,
@@ -298,10 +345,8 @@ Widget _buildLoad(LatestOpModel details, {String? name, int? ad,String? semester
             child: MaterialButton(
               onPressed: () {},
               child: Text(
-                "Approved by AdminName",
-                style: TextStyle(
-                  color: Color(0xff206500),
-                ),
+                StatusDetec(details.data1?.opStatus, "Fr Robin"),
+                style: TextStyle(color: ColorDetec1(details.data1?.opStatus)),
               ),
               color: ColorDetec(details.data1?.opStatus),
               shape: RoundedRectangleBorder(
@@ -315,28 +360,49 @@ Widget _buildLoad(LatestOpModel details, {String? name, int? ad,String? semester
     ),
   );
 }
-String DateConversion(String? a){
+
+String DateConversion(String? a) {
   DateTime dateTime = DateTime.parse(a!);
-  String  formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
+  String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
   return formattedDate;
 }
-String TimeConversion(String? a){
+
+String TimeConversion(String? a) {
   DateTime dateTime = DateTime.parse(a!);
-  String  formattedTime = DateFormat('hh:mm a').format(dateTime);
+  String formattedTime = DateFormat('hh:mm a').format(dateTime);
   return formattedTime;
 }
 
-Color ColorDetec(String? a){
-  if(a=="Pending"){
-   return Color(0xffABBDD3);
-  }
-  else if(a=="Approved"){
+Color ColorDetec(String? a) {
+  if (a == "Pending") {
+    return Color(0xffABBDD3);
+  } else if (a == "Approved") {
     return Color(0xff7EEC58);
-  }
-  else if(a=="Rejected"){
+  } else if (a == "Rejected") {
     return Color(0xffFD5C5C);
-  }
-  else {
+  } else {
     return Color(0xff002087);
+  }
+}
+String StatusDetec(String? a, String? b){
+  if (a == "Pending") {
+    return "Pending";
+  } else if (a == "Approved") {
+    return "Approved by $b";
+  } else if (a == "Rejected") {
+    return "Rejected by $b";
+  } else {
+    return "Dummy";
+  }
+}
+Color ColorDetec1(String? a) {
+  if (a == "Pending") {
+    return Color(0xff515a65);
+  } else if (a == "Approved") {
+    return Color(0xff437e2e);
+  } else if (a == "Rejected") {
+    return Color(0xff702727);
+  } else {
+    return Color(0xff202a4b);
   }
 }

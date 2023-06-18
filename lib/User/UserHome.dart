@@ -111,7 +111,6 @@ class _UserHomeState extends State<UserHome> {
                     ad=(state.details.data2?[0].ad);
                     helloString = "Hello";
                     homeString = "Home";
-                    print(ad);
                   });
                   // print(name);
                   // print(ad);

@@ -10,18 +10,18 @@ class QRCodeScannerPage extends StatefulWidget {
   @override
   _QRCodeScannerPageState createState() => _QRCodeScannerPageState();
 }
-
 class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
+  @override
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   String scannedText = '';
+
 var admnno = TextEditingController();
   @override
   Widget build(BuildContext context) {
 
 
     return Scaffold(
-
       backgroundColor: Color(0xffADE8F4),
       resizeToAvoidBottomInset: false,
       body: Center(

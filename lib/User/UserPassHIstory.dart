@@ -16,6 +16,7 @@ class UserHistory extends StatefulWidget {
   final String? name;
   final int? ad;
   final String? semester;
+
   const UserHistory({Key? key, required this.ad,required this.name, required  this.semester}) : super(key: key);
 
   @override
@@ -39,28 +40,33 @@ class _UserHistoryState extends State<UserHistory> {
 
   }
   Widget buildListDetails(){
-    return Container(
-      child: BlocProvider<OpDetailsBloc>(
-        create: (_) => _OpDetailsBloc,
-        child: BlocListener<OpDetailsBloc, OpDetailsStates>(
-          listener: (context,state) =>{
+    return RefreshIndicator(
+      onRefresh: () async {
+        _OpDetailsBloc.add(AllOpDetailsPull());
+      },
+      child: Container(
+        child: BlocProvider<OpDetailsBloc>(
+          create: (_) => _OpDetailsBloc,
+          child: BlocListener<OpDetailsBloc, OpDetailsStates>(
+            listener: (context,state) =>{
 
-          },
-          child: BlocBuilder<OpDetailsBloc,OpDetailsStates>(
-            builder: (context,state) {
-              if (state is OpDetailsInitial){
-                return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.white, size: 60));
-              }
-              else if (state is OpDetailsLoading){
-                return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.red, size: 60));
-              }
-              else if (state is OpDetailsSuccess){
-                return _buildCard(context,state.details,widget.name,widget.semester,widget.ad);
-              }
-              else{
-                return Text("Error Occur aayie");
-              };
             },
+            child: BlocBuilder<OpDetailsBloc,OpDetailsStates>(
+              builder: (context,state) {
+                if (state is OpDetailsInitial){
+                  return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.white, size: 60));
+                }
+                else if (state is OpDetailsLoading){
+                  return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.red, size: 60));
+                }
+                else if (state is OpDetailsSuccess){
+                  return _buildCard(context,state.details,widget.name,widget.semester,widget.ad);
+                }
+                else{
+                  return Text("Error Occur aayie");
+                };
+              },
+            ),
           ),
         ),
       ),
@@ -79,6 +85,8 @@ Widget _buildCard(BuildContext context, OpDetailsModel Details, String? name, se
   bool permit =true;
   return ListView.builder(
     reverse: true,
+shrinkWrap: true,primary: false,
+
     itemCount: Details.d2?.reversed.length,
     itemBuilder: (context, index) {
       print(Details.d2?.reversed.length,);
@@ -92,7 +100,7 @@ Widget _buildCard(BuildContext context, OpDetailsModel Details, String? name, se
          color =Color(0xffFD5C5C);
       }
       else if(Details.d2?[index].opStatus== "Expired"){
-        color = Color(0xff002087);
+        color = Color(0xff374a83);
         permit = false;
       }
       else{

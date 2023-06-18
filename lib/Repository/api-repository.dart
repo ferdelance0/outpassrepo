@@ -1,9 +1,12 @@
 import 'package:mini/Bloc/OpDetailsBloc.dart';
 import 'package:mini/models/ApplyOpModel.dart';
 import 'package:mini/models/LatestOpModel.dart';
+import 'package:mini/models/OpAcceptModel.dart';
 import 'package:mini/models/OpDetailsModel.dart';
 
+import '../models/DeleteOpModel.dart';
 import '../models/DetailsModel.dart';
+import '../models/OpRejectModel.dart';
 import 'api-provider.dart';
 
 class ApiRepository{
@@ -20,6 +23,16 @@ class ApiRepository{
   Future<LatestOpModel> LatestOpPull(){
     return _provider.LatestOpPull();
   }
+  Future<DeleteOpModel> DeleteOP(){
+    return _provider.DeleteOP();
+  }
+  Future<OpAcceptModel> AcceptOP(int index, String name){
+    return _provider.AcceptOp(index,name);
+  }
+  Future<OpRejectModel> RejectOP(int index, String name){
+    return _provider.RejectOp(index,name);
+  }
+
 }
 
 class NetworkError extends Error{}
