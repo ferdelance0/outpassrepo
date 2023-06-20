@@ -28,15 +28,15 @@ class _AdminDrawerState extends State<AdminDrawer> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ListTile(
-              onTap: (){Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => AdminAddStudents()),
-
-              );},
-              leading: Icon(Ionicons.person_add_outline,color: Colors.white),
-              title: Text("Add new Students",style: TextStyle(color: Colors.white)),
-            ),
+            // ListTile(
+            //   onTap: (){Navigator.pushReplacement(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => AdminAddStudents()),
+            //
+            //   );},
+            //   leading: Icon(Ionicons.person_add_outline,color: Colors.white),
+            //   title: Text("Add new Students",style: TextStyle(color: Colors.white)),
+            // ),
             ListTile(
               onTap: (){Navigator.pushReplacement(
                 context,

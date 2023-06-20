@@ -17,7 +17,9 @@ class UserHistory extends StatefulWidget {
   final int? ad;
   final String? semester;
 
-  const UserHistory({Key? key, required this.ad,required this.name, required  this.semester}) : super(key: key);
+  const UserHistory(
+      {Key? key, required this.ad, required this.name, required this.semester})
+      : super(key: key);
 
   @override
   State<UserHistory> createState() => _UserHistoryState();
@@ -30,16 +32,19 @@ class _UserHistoryState extends State<UserHistory> {
     // TODO: implement initState
     _OpDetailsBloc.add(AllOpDetailsPull());
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xffADE8F4),
-      appBar: UserAppbar(name: widget.name ,pgtitle: "Outpass History",),
-      body: buildListDetails()
-    );
-
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xffADE8F4),
+        appBar: UserAppbar(
+          name: widget.name,
+          pgtitle: "Outpass History",
+        ),
+        body: buildListDetails());
   }
-  Widget buildListDetails(){
+
+  Widget buildListDetails() {
     return RefreshIndicator(
       onRefresh: () async {
         _OpDetailsBloc.add(AllOpDetailsPull());
@@ -48,72 +53,71 @@ class _UserHistoryState extends State<UserHistory> {
         child: BlocProvider<OpDetailsBloc>(
           create: (_) => _OpDetailsBloc,
           child: BlocListener<OpDetailsBloc, OpDetailsStates>(
-            listener: (context,state) =>{
-
-            },
-            child: BlocBuilder<OpDetailsBloc,OpDetailsStates>(
-              builder: (context,state) {
-                if (state is OpDetailsInitial){
-                  return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.white, size: 60));
+            listener: (context, state) => {},
+            child: BlocBuilder<OpDetailsBloc, OpDetailsStates>(
+              builder: (context, state) {
+                if (state is OpDetailsInitial) {
+                  return Center(
+                      child: LoadingAnimationWidget.fallingDot(
+                          color: Colors.white, size: 60));
+                } else if (state is OpDetailsLoading) {
+                  return Center(
+                      child: LoadingAnimationWidget.fallingDot(
+                          color: Colors.red, size: 60));
+                } else if (state is OpDetailsSuccess) {
+                  return _buildCard(context, state.details, widget.name,
+                      widget.semester, widget.ad);
+                } else {
+                  return Center(child: Text("No Outpass History"));
                 }
-                else if (state is OpDetailsLoading){
-                  return Center(child: LoadingAnimationWidget.fallingDot(color: Colors.red, size: 60));
-                }
-                else if (state is OpDetailsSuccess){
-                  return _buildCard(context,state.details,widget.name,widget.semester,widget.ad);
-                }
-                else{
-                  return Text("Error Occur aayie");
-                };
+                ;
               },
             ),
           ),
         ),
       ),
     );
-
   }
-
-
-
 }
 
-
-
-Widget _buildCard(BuildContext context, OpDetailsModel Details, String? name, semester,int? ad){
+Widget _buildCard(BuildContext context, OpDetailsModel Details, String? name,
+    semester, int? ad) {
   Color color = Color(0xff7EEC58);
-  bool permit =true;
+  bool permit = true;
   return ListView.builder(
     reverse: true,
-shrinkWrap: true,primary: false,
-
+    shrinkWrap: true,
+    primary: false,
     itemCount: Details.d2?.reversed.length,
     itemBuilder: (context, index) {
-      print(Details.d2?.reversed.length,);
-      if(Details.d2?[index].opStatus== "Pending"){
-         color = Color(0xffABBDD3);
-      }
-      else if(Details.d2?[index].opStatus== "Approved"){
-         color = Color(0xff7EEC58);
-      }
-      else if(Details.d2?[index].opStatus== "Rejected"){
-         color =Color(0xffFD5C5C);
-      }
-      else if(Details.d2?[index].opStatus== "Expired"){
+      print(
+        Details.d2?.reversed.length,
+      );
+      int lastindex = Details.d2?.reversed.length ?? 0;
+      if (Details.d2?[index].opStatus == "Pending") {
+        color = Color(0xffABBDD3);
+      } else if (Details.d2?[index].opStatus == "Approved") {
+        color = Color(0xff7EEC58);
+      } else if (Details.d2?[index].opStatus == "Rejected") {
+        color = Color(0xffFD5C5C);
+      } else if (Details.d2?[index].opStatus == "Expired") {
         color = Color(0xff374a83);
         permit = false;
-      }
-      else{
+      } else {
         color = Color(0xffffffff);
       }
-      DateTime LeavingdateTime = DateTime.parse("${Details.d2![index].dateofleaving}");
-      String  LeavingformattedDate = DateFormat('yyyy-MM-dd').format(LeavingdateTime);
+      DateTime LeavingdateTime =
+          DateTime.parse("${Details.d2![index].dateofleaving}");
+      String LeavingformattedDate =
+          DateFormat('yyyy-MM-dd').format(LeavingdateTime);
       String LeavingformattedTime = DateFormat('HH:mm').format(LeavingdateTime);
 
-
-      DateTime ReturningdateTime = DateTime.parse("${Details.d2![index].dateofreturn}");
-      String  ReturningformattedDate = DateFormat('yyyy-MM-dd').format(ReturningdateTime);
-      String ReturningformattedTime = DateFormat('HH:mm').format(ReturningdateTime);
+      DateTime ReturningdateTime =
+          DateTime.parse("${Details.d2![index].dateofreturn}");
+      String ReturningformattedDate =
+          DateFormat('yyyy-MM-dd').format(ReturningdateTime);
+      String ReturningformattedTime =
+          DateFormat('HH:mm').format(ReturningdateTime);
 
       return SingleChildScrollView(
         child: Padding(
@@ -137,7 +141,7 @@ shrinkWrap: true,primary: false,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                         " ${Details.d2?[index].purpose}",
+                          " ${Details.d2?[index].purpose}",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -145,16 +149,15 @@ shrinkWrap: true,primary: false,
                         ),
                         Center(
                             child: SizedBox(
-                              width: 15,
-                            )),
+                          width: 15,
+                        )),
                         Center(
                             child: Text("at",
-                                style: TextStyle(
-                                    color: Color(0xff63BBDA)))),
+                                style: TextStyle(color: Color(0xff63BBDA)))),
                         Center(
                             child: SizedBox(
-                              width: 15,
-                            )),
+                          width: 15,
+                        )),
                         Text(
                           "${Details.d2![index].destination}",
                           style: TextStyle(
@@ -172,8 +175,8 @@ shrinkWrap: true,primary: false,
                       children: [
                         Text(
                           "Leaves on :",
-                          style: TextStyle(
-                              color: Color(0xff63BBDA), fontSize: 15),
+                          style:
+                              TextStyle(color: Color(0xff63BBDA), fontSize: 15),
                         ),
                         SizedBox(
                           width: 7,
@@ -190,8 +193,8 @@ shrinkWrap: true,primary: false,
                         ),
                         Text(
                           "at:",
-                          style: TextStyle(
-                              color: Color(0xff63BBDA), fontSize: 15),
+                          style:
+                              TextStyle(color: Color(0xff63BBDA), fontSize: 15),
                         ),
                         SizedBox(
                           width: 7,
@@ -213,8 +216,8 @@ shrinkWrap: true,primary: false,
                       children: [
                         Text(
                           "Arrives on :",
-                          style: TextStyle(
-                              color: Color(0xff63BBDA), fontSize: 15),
+                          style:
+                              TextStyle(color: Color(0xff63BBDA), fontSize: 15),
                         ),
                         SizedBox(
                           width: 7,
@@ -231,8 +234,8 @@ shrinkWrap: true,primary: false,
                         ),
                         Text(
                           "at:",
-                          style: TextStyle(
-                              color: Color(0xff63BBDA), fontSize: 15),
+                          style:
+                              TextStyle(color: Color(0xff63BBDA), fontSize: 15),
                         ),
                         SizedBox(
                           width: 7,
@@ -253,23 +256,33 @@ shrinkWrap: true,primary: false,
                   Column(
                     children: [
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaterialButton(
                             child: Text("${Details.d2?[index].opStatus}"),
-                            height: 33.12 ,
+                            height: 33.12,
                             minWidth: 280,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(29.0),
                             ),
                             elevation: 0,
-                            color: color, onPressed: () {
-                              {Navigator.push(context, MaterialPageRoute(builder: (context) =>UserOutPassDetailed(name: name,ad: ad,semester: semester)));
-
-                          }
-                               },
-                          )],
+                            color: color,
+                            onPressed: () {
+                              if (index == lastindex - 1) {
+                                {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UserOutPassDetailed(
+                                                  name: name,
+                                                  ad: ad,
+                                                  semester: semester)));
+                                }
+                              }
+                            },
+                          )
+                        ],
                       ),
                       SizedBox(
                         height: 8,

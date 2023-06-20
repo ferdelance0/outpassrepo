@@ -51,7 +51,7 @@ var admnno = TextEditingController();
             SizedBox(height: 20,),
             InkWell(
               onTap: (){
-                controller?.resumeCamera();
+                 controller?.resumeCamera();
               },
               child: Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
@@ -71,37 +71,6 @@ var admnno = TextEditingController();
               ),
             ),
             SizedBox(height: 25,),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: admnno,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xffB4E3EC),
-                    prefixIconColor: Colors.black,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(17))
-                    ),
-                    hintText: 'Username',prefixIcon: Icon(Icons.person_2_rounded)
-
-                ),
-              ),
-            ),
-            MaterialButton(
-              height: 43.12 ,
-              minWidth: 133.62,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(29.0),
-              ),
-              elevation: 0,
-              color: Color(0xff03045E),
-              onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecurityCheck(scannedText: admnno.text!)),
-              );},
-              child: Text('Submit',style: TextStyle(color: Colors.white,fontSize: 18.58,fontWeight: FontWeight.w100),),
-            ),
-
           ],
         ),
       ),
@@ -112,7 +81,7 @@ var admnno = TextEditingController();
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if(scanData.code!.isNotEmpty){
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => SecurityCheck(scannedText: scanData.code!)),
         );

@@ -345,7 +345,7 @@ Widget _buildLoad(LatestOpModel details,
             child: MaterialButton(
               onPressed: () {},
               child: Text(
-                StatusDetec(details.data1?.opStatus, "Fr Robin"),
+                StatusDetec(details.data1?.opStatus,details.data1?.admin ),
                 style: TextStyle(color: ColorDetec1(details.data1?.opStatus)),
               ),
               color: ColorDetec(details.data1?.opStatus),

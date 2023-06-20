@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
+import 'package:mini/Bloc/AdminHomeDataBloc.dart';
+import 'package:mini/Bloc/AdmnPullBloc.dart';
 import 'package:mini/Bloc/ApplyOpBloc.dart';
+import 'package:mini/Bloc/RejectedOpBloc.dart';
+import 'package:mini/Bloc/SecVerifBloc.dart';
 import 'package:mini/security/SecurityHome.dart';
 import 'package:mini/security/referencefileforqrscanner.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -10,6 +14,7 @@ import 'Bloc/AcceptOpBloc.dart';
 import 'Bloc/LatestOpBloc.dart';
 import 'Bloc/LoginBloc.dart';
 import 'Bloc/RejectOpBloc.dart';
+import 'Bloc/SecLopBloc.dart';
 import 'LoginPage.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'User/UserHome.dart';
@@ -36,6 +41,9 @@ class MyApp extends StatelessWidget {
               BlocProvider<ApplyOpBloc>(
                 create: (context) => ApplyOpBloc(),
               ),
+              BlocProvider<AdmnPullOpBloc>(
+                create: (context) => AdmnPullOpBloc(),
+              ),
               BlocProvider<LatestOpBloc>(
                 create: (context) => LatestOpBloc(),
               ),
@@ -44,6 +52,18 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider<RejectOpBloc>(
                 create: (context) => RejectOpBloc(),
+              ),
+              BlocProvider<AdminHomeDataBloc>(
+                create: (context) => AdminHomeDataBloc(),
+              ),
+              BlocProvider<RejectedOpBloc>(
+                create: (context) => RejectedOpBloc(),
+              ),
+              BlocProvider<SecVerifBloc>(
+                create: (context) => SecVerifBloc(),
+              ),
+              BlocProvider<SecLopBloc>(
+                create: (context) => SecLopBloc(),
               ),
         ],
             child: MaterialApp(

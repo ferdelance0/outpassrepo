@@ -11,7 +11,8 @@ import '../models/DetailsModel.dart';
 import 'UserPassHIstory.dart';
 
 class UserHome extends StatefulWidget {
-  const UserHome({Key? key, String? name}) : super(key: key);
+
+  const UserHome( {Key? key, String? name}) : super(key: key);
 
   @override
   State<UserHome> createState() => _UserHomeState();
@@ -33,7 +34,6 @@ class _UserHomeState extends State<UserHome> {
     token = prefs.getString('token');
     if (token != null) {
       decodedToken = await JwtDecoder.decode(token);
-      // print(decodedToken["ad"]);
     }
     setState(() {
       isLoading = false;
