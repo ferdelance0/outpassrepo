@@ -56,11 +56,21 @@ class _AdminDrawerState extends State<AdminDrawer> {
               title: Text("Rejected Outpasses",style: TextStyle(color: Colors.white)),
             ),
             ListTile(
-              onTap: (){Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
 
-              );},
+
+
+
+              onTap: (){
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                    LoginPage()), (Route<dynamic> route) => false);
+              //   Navigator.pushReplacement(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => LoginPage()),
+              //
+              // );
+
+
+                },
 
               leading: Icon(Ionicons.walk_outline,color: Colors.white),
               title: Text("SignOut",style: TextStyle(color: Colors.white),),

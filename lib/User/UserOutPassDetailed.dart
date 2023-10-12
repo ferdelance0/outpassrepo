@@ -266,6 +266,7 @@ Widget _buildLoad(LatestOpModel details,
               fontSize: 18,
             ),
           ),
+          semester==null?SizedBox.shrink():
           Text(
             "${semester}",
             style: TextStyle(
@@ -391,7 +392,10 @@ String StatusDetec(String? a, String? b){
     return "Approved by $b";
   } else if (a == "Rejected") {
     return "Rejected by $b";
-  } else {
+  }
+  else if (a == "Expired") {
+    return "Expired";
+  }else {
     return "Dummy";
   }
 }
@@ -402,7 +406,10 @@ Color ColorDetec1(String? a) {
     return Color(0xff437e2e);
   } else if (a == "Rejected") {
     return Color(0xff702727);
-  } else {
+  }
+  else if (a == "Expired") {
+    return Color(0xffffffff);
+  }else {
     return Color(0xff202a4b);
   }
 }
